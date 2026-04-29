@@ -24,6 +24,12 @@ function App() {
     setTransactions(transactions.filter(t => t.id !== id));
   };
 
+  const handleUpdateTransaction = (updatedTransaction) => {
+    setTransactions(transactions.map(t => 
+      t.id === updatedTransaction.id ? updatedTransaction : t
+    ));
+  };
+
   return (
     <div className="app">
       <h1>Finance Tracker</h1>
@@ -31,7 +37,7 @@ function App() {
 
       <Summary transactions={transactions} />
       <TransactionForm onAdd={handleAddTransaction} />
-      <TransactionList transactions={transactions} onDelete={handleDeleteTransaction} />
+      <TransactionList transactions={transactions} onDelete={handleDeleteTransaction} onUpdate={handleUpdateTransaction} />
     </div>
   );
 }
