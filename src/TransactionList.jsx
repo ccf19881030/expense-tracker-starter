@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const categories = ["food", "housing", "utilities", "transport", "entertainment", "salary", "other"];
 
-export default function TransactionList({ transactions }) {
+export default function TransactionList({ transactions, onDelete }) {
   const [filterType, setFilterType] = useState("all");
   const [filterCategory, setFilterCategory] = useState("all");
 
@@ -38,6 +38,7 @@ export default function TransactionList({ transactions }) {
             <th>Description</th>
             <th>Category</th>
             <th>Amount</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +49,9 @@ export default function TransactionList({ transactions }) {
               <td>{t.category}</td>
               <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
                 {t.type === "income" ? "+" : "-"}${t.amount}
+              </td>
+              <td>
+                <button onClick={() => onDelete(t.id)}>Delete</button>
               </td>
             </tr>
           ))}
